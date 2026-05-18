@@ -27,6 +27,8 @@
 > ```
 >
 > Manual re-slim is the deliberate baseline. If Pedro's update cadence picks up and re-slim becomes tedious, escalate to a `.gitattributes` `merge=ours` strategy on the slimmed paths.
+>
+> **Operating manual:** [`MAINTAINER-HANDBOOK.md`](MAINTAINER-HANDBOOK.md) at the repo root has step-by-step recipes for (1) starting a new project from this slim fork, (2) re-slimming after a Pedro upstream pull, (3) incrementally promoting skills/agents/rules from fork scope to user scope. Pin it in your IDE.
 
 ---
 
