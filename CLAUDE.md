@@ -11,13 +11,7 @@
 
 ---
 
-## Core Principles
-
-- **Plan first** -- enter plan mode before non-trivial tasks; save plans to `quality_reports/plans/`
-- **Verify after** -- compile/render and confirm output at the end of every task
-- **Single source of truth** -- Beamer `.tex` is authoritative; Quarto `.qmd` derives from it
-- **Quality gates** -- nothing ships below 80/100
-- **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to MEMORY.md
+> **Slim-fork note (2026-05-18):** Framework principles (plan first, verify after, single source of truth, two-tier memory, [LEARN] tags, contractor mode after approval) live at `~/.claude/CLAUDE.md` in user scope and auto-load in every Claude Code session. This file is the **project-specific delta** only. See [`README.md`](README.md) for the slim-fork architecture and the maintenance workflow when Pedro pushes upstream updates.
 
 ---
 

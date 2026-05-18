@@ -1,3 +1,39 @@
+# My Claude Code Setup — slim fork
+
+> **This is Sebastian Pfeil's [slim fork](https://github.com/contest27/claude-code-my-workflow) of Pedro Santanna's [pedrohcgs/claude-code-my-workflow](https://github.com/pedrohcgs/claude-code-my-workflow) (the upstream original).** The slim version ships **project scaffolding only** — the framework backbone (CLAUDE.md core principles, MEMORY.md cross-project patterns, generic rules like `plan-first-workflow`, `meta-governance`, `quality-gates`, `session-logging`, `verification-protocol`, `single-source-of-truth`) lives at **user scope** (`~/.claude/`) on the fork-maintainer's machine and auto-loads in every Claude Code session — not in the cloned project.
+>
+> **What that means for new project clones:**
+>
+> - Clone this fork as your project bootstrap.
+> - On a machine that has `~/.claude/CLAUDE.md` already configured, the framework auto-loads — you just need project-specific content in the cloned `CLAUDE.md` + `MEMORY.md`.
+> - On a machine that does NOT have user-scope `~/.claude/` configured, the cloned project has no framework backbone — either set up user scope first, or pull the framework files in from the upstream remote (`git remote add upstream https://github.com/pedrohcgs/claude-code-my-workflow.git` then cherry-pick the rules/CLAUDE.md content you need).
+>
+> **What was slimmed (2026-05-18):** 12 generic rules deleted from `.claude/rules/` (now at user scope: `meta-governance`, `plan-first-workflow`, `orchestrator-protocol`, `orchestrator-research`, `session-logging`, `verification-protocol`, `single-source-of-truth`, `quality-gates`, `exploration-fast-track`, `exploration-folder-protocol`, `pdf-processing`, `r-code-conventions`). `CLAUDE.md` core-principles section stripped (delegated to user scope). `MEMORY.md` replaced with a project-stub (Pedro's template-development `[LEARN]` entries moved out — they applied to template upkeep, not user projects).
+>
+> **What was kept:** Pedro's lecture-specific rules (`beamer-quarto-sync`, `no-pause-beamer`, `tikz-visual-quality`), paper-revision-adjacent rules (`proofreading-protocol`, `replication-protocol`), the `knowledge-base-template` (still project-scope), Pedro's full agents/skills/hooks/templates (not yet promoted to user scope), and all the docs below.
+>
+> **Maintenance workflow** when Pedro pushes upstream updates:
+>
+> ```powershell
+> cd C:\Users\P314966\workflow-template-slim
+> git fetch upstream
+> git diff main upstream/main          # review what Pedro changed
+> git merge upstream/main               # accept the merge; framework files crept back in
+> # Manually delete framework files re-introduced by the merge (same paths slimmed on 2026-05-18).
+> # Pedro's newly added files: keep if project-scaffolding, delete if its content belongs in ~/.claude/.
+> git add -A
+> git commit -m "Pull Pedro's <date> updates; re-slim"
+> git push origin main
+> ```
+>
+> Manual re-slim is the deliberate baseline. If Pedro's update cadence picks up and re-slim becomes tedious, escalate to a `.gitattributes` `merge=ours` strategy on the slimmed paths.
+
+---
+
+> **Original Pedro template README follows** — most of it still applies to this fork's contents. Adjust your mental model where it discusses generic rules / CLAUDE.md principles / generic `[LEARN]` patterns (those live at user scope now).
+
+---
+
 # My Claude Code Setup
 
 > **Work in progress.** This is not meant to be a polished guide for everyone. It's mostly a summary of how I've been using Claude Code for academic work — slides, papers, data analysis, and more. I keep learning new things, and as I do, I keep updating these files. This is just a way for me to share what I've figured out with friends and colleagues.
