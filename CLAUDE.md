@@ -181,7 +181,6 @@ Full step-by-step in [`MAINTAINER-HANDBOOK.md`](MAINTAINER-HANDBOOK.md).
 
 - **Companion paste:** drop the block in [`~/.claude/companion-instructions-claude-ai.md`](file:///C:/Users/P314966/.claude/companion-instructions-claude-ai.md) into claude.ai Custom Instructions + Cowork field (1633 chars; trim per in-file guide if needed).
 - **Skills/agents incremental promotion:** Pedro now ships ~30 skills + 14 agents in this fork after v1.8.0; only `review-matlab` + `matlab-reviewer` are at user scope so far. Promote per project need.
-- **Consider promoting Pedro's new generic rules to user scope:** `content-invariants`, `cross-artifact-review`, `post-flight-verification`, `summary-parity` (the TikZ ones stay fork-scope). Deferred from the 2026-05-18 re-slim.
 - **Reconcile user-scope rules with Pedro's v1.8.0 updates:** the user-scope versions of `orchestrator-protocol`, `quality-gates`, `r-code-conventions` are at Pedro's v1.2.0-era content; Pedro updated them since (Pre-Flight Reports, Post-Flight Verification, Surface-Sync gate). Diff and selectively pull updates.
 - **Next re-slim:** on the next Pedro push (no schedule).
 
