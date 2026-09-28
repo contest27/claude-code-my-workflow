@@ -7,39 +7,13 @@ When a mistake is corrected, append a `[LEARN:category]` entry below; most recen
 
 ## Workflow Patterns
 
-[LEARN:project] **Upstream:** [`pedrohcgs/claude-code-my-workflow`](https://github.com/pedrohcgs/claude-code-my-workflow) (Pedro Santanna). Wired as `git remote add upstream` on 2026-05-18 for pulls. As of 2026-05-18 evening, fork is synced with Pedro through v1.8.0 (commit `e07d935`, PR #104).
+[LEARN:workflow] Requirements specification catches ambiguity before planning → reduces rework 30-50%. Spec-then-plan for complex/ambiguous tasks (>1 hour or >3 files): AskUserQuestion (3-5 questions) → `quality_reports/specs/YYYY-MM-DD_description.md` (not scattered in root — keeps structure) with MUST/SHOULD/MAY requirements → clarity status (CLEAR/ASSUMED/BLOCKED) → approval → then draft plan.
 
-[LEARN:project] **Slim commits on this fork:**
-- [`457402d` initial slim](https://github.com/contest27/claude-code-my-workflow/commit/457402d) — 12 rules + CLAUDE.md core + MEMORY.md template-history removed.
-- [`a379acb`](https://github.com/contest27/claude-code-my-workflow/commit/a379acb) — workflow-meta layer (dual-role CLAUDE.md / MEMORY.md, plan + session log relocated from Bank Capital).
-- [`0f84967`](https://github.com/contest27/claude-code-my-workflow/commit/0f84967) — MAINTAINER-HANDBOOK.md.
-- [`ffcfae6`](https://github.com/contest27/claude-code-my-workflow/commit/ffcfae6) — Pull Pedro v1.2.0 → v1.8.0; re-slim.
-- (this commit) — Promote 4 new rules to user scope; handbook polish reflecting v1.8.0 re-slim lessons.
-
-[LEARN:project] **Fork origin:** This is Sebastian's fork. Sebastian's GitHub handle is `contest27`. Pedro Santanna's is `pedrohcgs`.
-
----
+[LEARN:workflow] Plans, specs, and session logs must live on disk (not just in conversation) to survive compression and session boundaries; quality reports only at merge time. Context survival before compression: (1) Update MEMORY.md with [LEARN] entries, (2) Ensure session log current (last 10 min), (3) Active plan saved to disk, (4) Open questions documented. The pre-compact hook displays checklist. *[2026-09-26: now silent; restores only what's on disk.]*
 
 ## Rules Promoted to User Scope
 
-[LEARN:project] **Sixteen generic rules at `~/.claude/rules/`:**
-
-Initial 12 (2026-05-18):
-
-| Rule | Why generic |
-|---|---|
-| `meta-governance.md` | Generic-vs-specific rubric — framework's self-description |
-| `plan-first-workflow.md` | Universal pattern |
-| `orchestrator-protocol.md` | Contractor-mode loop |
-| `orchestrator-research.md` | Research-mode variant |
-| `session-logging.md` | Three-trigger pattern |
-| `verification-protocol.md` | Compile/render/test |
-| `single-source-of-truth.md` | Universal principle (path-scoped to Slides/Quarto for the lecture case) |
-| `quality-gates.md` | Concept-only (advisory thresholds); project-specific deduction tables stay in projects |
-| `exploration-fast-track.md` | Sandbox workflow |
-| `exploration-folder-protocol.md` | Sandbox structure |
-| `pdf-processing.md` | Safe PDF chunking |
-| `r-code-conventions.md` | R coding standards |
+[LEARN:documentation] When adding new features, update BOTH README and guide immediately to prevent documentation drift — stale docs break user trust. Document new templates in README's "What's Included" with their purpose; the inventory must be complete and accurate.
 
 Additional 4 (2026-05-18, post-v1.8.0 re-slim):
 
@@ -50,46 +24,21 @@ Additional 4 (2026-05-18, post-v1.8.0 re-slim):
 | `post-flight-verification.md` | Chain-of-Verification anti-hallucination (path-scoped to skill files that produce factual claims) |
 | `summary-parity.md` | Anti-whack-a-mole for summary paragraphs (universal — fires on docs and frontmatter descriptions) |
 
-## Rules Retained at Fork Scope
+[LEARN:design] Framework-oriented > Prescriptive rules: constitutional governance and requirements specs work as TEMPLATES with examples users customize to their domain. Quality standard for guide additions: useful + pedagogically strong + drives usage + leaves great impression + improves upon starting fresh + no redundancy + not slow — all 7 must hold.
 
-[LEARN:project] **Eight rules kept at fork scope** (lecture-specific or paper-revision-specific):
-
-| Rule | Reason |
-|---|---|
-| `beamer-quarto-sync.md` | Lecture-specific (Beamer ↔ Quarto parity protocol) |
-| `no-pause-beamer.md` | Lecture-specific (Beamer overlay hygiene) |
-| `tikz-visual-quality.md` | Lecture-specific (TikZ diagram standards) |
-| `tikz-measurement.md` | Lecture-specific (added by Pedro v1.3.0) |
-| `tikz-prevention.md` | Lecture-specific (added by Pedro v1.3.0) |
-| `proofreading-protocol.md` | Not promoted — Bank Capital has a customised version |
-| `replication-protocol.md` | Not promoted — domain-specific replication patterns |
-| `knowledge-base-template.md` | Not promoted — heavy diff between Pedro's and Sebastian's variants |
+[LEARN:design] Generic means working for any academic workflow: pure LaTeX (no Quarto), pure R (no LaTeX), Python/Jupyter, any domain (not just econometrics) — guide stays framework-oriented: templates users customize, no "thou shalt" rules. Test recommendations across use cases.
 
 ## Skills and Agents
-
-[LEARN:project] **Not yet promoted to user scope.** Pedro ships ~30 skills + 14 agents in this fork after v1.8.0. Only `review-matlab` (skill) and `matlab-reviewer` (agent) are at user scope so far, promoted 2026-05-18 morning as the worked precedent. Promote individual skills/agents to user scope when they're needed across projects.
 
 [LEARN:files] Templates belong in `templates/` with descriptive names. Don't enumerate the inventory here — a hand-kept list goes stale (this entry's own list was missing three files when audited); `ls templates/` is the inventory.
 
 ## Maintenance Decisions
 
-[LEARN:meta] **Manual re-slim chosen over `.gitattributes merge=ours`.** Pedro's update cadence is unpredictable; manual review when pulling upstream gives the maintainer visibility into what changed. Escalate to `merge=ours` only if cadence forces it.
-
-[LEARN:meta] **Skills and agents stay at fork-scope by default** (rather than bulk-promote). Pedro has ~30 skills + 14 agents on his upstream after v1.8.0; bulk promotion is outside reasonable session time-boxes. Incremental promotion per project need.
-
-[LEARN:meta] **Dual-role CLAUDE.md.** This repo's `CLAUDE.md` serves two audiences: (1) downstream users who clone the fork as a project bootstrap (scaffolding at top with `[YOUR PROJECT NAME]` placeholders), (2) Sebastian iterating on the slim fork itself (maintainer view at the bottom under a clear divider, instructing downstream users to delete it). Same pattern in `MEMORY.md`.
+[LEARN:governance] Constitutional articles distinguish immutable principles (non-negotiable for quality/reproducibility) from flexible user preferences; keep to 3-7 articles. Examples: Primary Artifact (which file is authoritative), Plan-First Threshold (when to plan), Quality Gate (minimum score), Verification Standard (what must pass), File Organization (where files live). Amendments: ask the user whether deviating from article is "amending Article X (permanent)" or "overriding for this task (one-time exception)". Preserves institutional memory.
 
 [LEARN:meta] **Workflow-meta project location.** The slim fork's local clone at `C:\Users\P314966\workflow-template-slim\` IS the workflow-meta project — when Sebastian opens Claude Code here, the maintainer view applies. The 2026-05-18 generalisation work was misfiled in Bank Capital's `my-project/quality_reports/` and relocated here; forwarding stubs at the old Bank Capital paths point here.
 
-[LEARN:meta] **First re-slim: Pedro v1.2.0 → v1.8.0 pull (2026-05-18 evening).** 103 commits behind upstream; 111 files changed, 10K+ insertions. Merged via dedicated branch `reslim-2026-05-18-pedro-v1.8.0`. Conflicts: 3 modify/delete (re-deleted, user-scope authoritative); 2 content conflicts on CLAUDE.md / MEMORY.md (kept dual-role + selectively merged Pedro's improvements).
-
-[LEARN:meta] **Lessons from the first re-slim** (codified in MAINTAINER-HANDBOOK Workflow 2):
-- **Always branch for non-trivial pulls.** 100+ commits behind is non-trivial. Branch makes rollback trivial.
-- **Conflict resolution pattern:** modify/delete on user-scope rules → re-delete (user scope wins); content conflicts on CLAUDE.md / MEMORY.md → keep our dual-role version + manually merge Pedro's improvements (new skill table rows, command updates, current-state samples).
-- **Pedro's new files:** apply biology-PhD rubric. Promote what's generic; keep what's lecture-specific or has unresolved dependencies on fork-scope skills/agents.
-- **Path-scoping enables aggressive promotion.** Rules with `paths:` frontmatter only fire when matching files exist — promoting a lecture-specific rule to user scope is harmless in non-lecture projects.
-
-[LEARN:meta] **4-rule promotion (2026-05-18 evening, immediately after v1.8.0 re-slim).** `content-invariants`, `cross-artifact-review`, `post-flight-verification`, `summary-parity` promoted from fork scope to `~/.claude/rules/`. Rationale per rule: each has `paths:` frontmatter so it only fires when relevant; `summary-parity` is genuinely universal; the others either lecture-target (content-invariants, dormant in non-lecture projects) or skill-target (post-flight-verification fires when editing specific skill files). User-scope CLAUDE.md "Cross-cutting rules" table updated with all four.
+[LEARN:skills] Effective skill descriptions use trigger phrases users actually say ("check citations", "format results", "validate protocol") → Claude knows when to load skill. Skills need 3 sections minimum: Instructions (step-by-step), Examples (concrete scenarios), Troubleshooting (common errors) → users can debug independently. Domain-specific examples beat generic ones (citation checker — psychology; protocol validator — biology; regression formatter — economics) — they show adaptability. *[2026-09-26: name situations, not synonyms; state outcome, constraints, checks.]*
 
 [LEARN:meta] **Pedro's user-scope-relevant rule updates pending.** Pedro v1.3.0–v1.8.0 changed `orchestrator-protocol`, `quality-gates`, `r-code-conventions` in ways worth reviewing for incorporation into the user-scope copies (Pre-Flight Reports framing, Post-Flight Verification framing, Surface-Sync gate insights). Deferred — diff Pedro's vs user-scope in a follow-up session.
 
@@ -99,27 +48,21 @@ Additional 4 (2026-05-18, post-v1.8.0 re-slim):
 
 [LEARN:open] **Skills/agents promotion to user scope:** incremental, per project need.
 
-[LEARN:open] **Reconcile user-scope rule updates from Pedro v1.8.0:** `orchestrator-protocol.md`, `quality-gates.md`, `r-code-conventions.md` at user-scope are at Pedro's pre-PR-#35 content; Pedro's newer versions are in `workflow-template-upstream/.claude/rules/` for diff.
-
-[LEARN:open] **Re-slim on next Pedro push:** follow `MAINTAINER-HANDBOOK.md` Workflow 2.
-
-[LEARN:open] **Companion claude.ai paste:** Sebastian to paste the contents of [`~/.claude/companion-instructions-claude-ai.md`](file:///C:/Users/P314966/.claude/companion-instructions-claude-ai.md) into claude.ai Custom Instructions + Cowork field. 1633 chars; trim per the in-file guide if the field rejects.
+[LEARN:meta] Repository dual nature requires explicit governance: what's generic (commit) vs specific (gitignore) → prevents template pollution. Dogfooding principles must be enforced: plan-first, spec-then-plan, quality gates, session logs → we follow our own guide. Template work (infrastructure, docs) skipped session logs — those were for user work (slides, analysis), keeping forks clean. *[Superseded 2026-09-26: logs are gitignored; a Stop hook writes them.]*
 
 [LEARN:open] **Wife's custom instructions:** drafted in the 2026-05-18 session; Sebastian to fill in name + language and paste into her account.
 
-[LEARN:drift] `replace_all` on one phrasing (e.g., `"26 skills"`) misses sibling phrasings — `"26 skills, and 21 rules"` (extra "and"), `"26 slash commands"`, `"template's 26"`, `"N skills on day one"` (prose). Count drift hit us 3 times in v1.5.x (PRs #70, #76, #78). Solution: `scripts/check-surface-sync.py` with compound regex patterns as a pre-commit gate. Adding a new phrasing to documentation requires adding a matching regex to the script, otherwise it won't be caught.
-
-[LEARN:drift] Guard against false positives when scanning for template counts: `"3 parallel agents"`, `"17 specialized agents"` (clo-author attribution), `"start with 2-3 skills"` are all legitimate non-template uses of `N + category` phrases. Use compound patterns requiring multiple template-specific tokens on the same line.
+[LEARN:drift] `replace_all` on one phrasing (e.g., `"26 skills"`) misses sibling phrasings — `"26 skills, and 21 rules"` (extra "and"), `"26 slash commands"`, `"template's 26"`, `"N skills on day one"` (prose). Count drift hit us 3 times in v1.5.x (PRs #70, #76, #78). Solution: `scripts/check-surface-sync.py` with compound regex patterns as a pre-commit gate. Adding a new phrasing to documentation requires adding a matching regex to the script, otherwise it won't be caught. Conversely, guard against false positives when scanning for template counts: `"3 parallel agents"`, `"17 specialized agents"` (clo-author attribution), `"start with 2-3 skills"` are all legitimate non-template uses of `N + category` phrases. Use compound patterns requiring multiple template-specific tokens on the same line.
 
 ## Claude Code Hooks
 
 [LEARN:hooks] Stop-hook block protocol has TWO valid forms: (a) legacy — `exit 2` + reason on stderr; (b) modern — `exit 0` + JSON `{"decision":"block","reason":"..."}` on stdout. `log-reminder.py` uses the modern form. Audit agents unfamiliar with the modern protocol will flag this as "should exit 2" — false alarm. Documented in `/deep-audit` skill's false-alarm list.
 
-[LEARN:hooks] `initialPermissionMode` in VSCode settings only fires at **session start**. Mid-session mode toggles (via `Shift+Tab` or `/permission-mode`) override the file settings until session end. The 6-tier permission stack: VSCode user / workspace / CLI user / project / project-local / in-session runtime — the last is authoritative. "Prompts fire despite bypass config" is almost always a stale session, not a settings bug.
+[LEARN:hooks] `initialPermissionMode` in VSCode settings only fires at **session start**. Mid-session mode toggles (via `Shift+Tab` or `/permission-mode`) override the file settings until session end. The 6-tier permission stack: VSCode user / workspace / CLI user / project / project-local / in-session runtime — the last is authoritative. "Prompts fire despite bypass config" is almost always a stale session, not a settings bug. *[2026-09-26: no `/permission-mode` command; a project-settings bypass (not honoured) is as common a cause.]*
 
 ## Plan→Bypass Framing
 
-[LEARN:safety] Do NOT frame Plan→Bypass as a "safety boundary" or "safety guarantee." Plan approval gives you a chance to review the APPROACH before execution, but exiting plan mode returns the session to `defaultMode` (bypassPermissions), at which point any tool call runs under the full allowlist. Frame as "review-before-execute convenience." If a user needs a real enforcement boundary, they should keep `defaultMode: "default"` and approve each high-risk tool individually.
+[LEARN:safety] Do NOT frame Plan→Bypass as a "safety boundary" or "safety guarantee." Plan approval gives you a chance to review the APPROACH before execution, but exiting plan mode returns the session to `defaultMode` (bypassPermissions *[2026-09-26: the mode the approval prompt picks; no bypass default]*), at which point any tool call runs under the full allowlist. Frame as "review-before-execute convenience." If a user needs a real enforcement boundary, they should keep `defaultMode: "default"` and approve each high-risk tool individually.
 
 ## Privacy in Diagnostic Skills
 
@@ -149,7 +92,7 @@ Additional 4 (2026-05-18, post-v1.8.0 re-slim):
 
 2. **Cross-artifact review** (`/review-paper` + `/review-r` + `/audit-reproducibility`) — **horizontal dependency traversal** — a manuscript's claims depend on scripts' outputs, so the paper reviewer spawns script reviewers and reproducibility checkers alongside it. Best for **paper ↔ code consistency** (ATTs, coefficients, N match the outputs that produced them).
 
-3. **Post-Flight Verification / CoVe** (`/verify-claims` + `claim-verifier` agent, v1.7.0) — **single agent, fresh-context fork** — the verifier has never seen the draft; it answers verification questions from the source material alone, using `context: fork` to architecturally enforce independence. Best for **factual hallucination** (fabricated citations, wrong dataset fields, misattributed findings). Adapted from Dhuliawala et al. 2023 ([arXiv:2309.11495](https://arxiv.org/abs/2309.11495)).
+3. **Post-Flight Verification / CoVe** (`/verify-claims` + `claim-verifier` agent, v1.7.0) — **single agent, fresh-context fork** — the verifier has never seen the draft; it answers verification questions from the source material alone, using `context: fork` to architecturally enforce independence. Best for **factual hallucination** (fabricated citations, wrong dataset fields, misattributed findings). Adapted from Dhuliawala et al. 2023 ([arXiv:2309.11495](https://arxiv.org/abs/2309.11495)). *[2026-09-26: use a fresh Agent call; a fork inherits the draft.]*
 
 The key insight: each enforces independence differently — role tension, dependency-graph traversal, context isolation. A skill needing all three (e.g. `/review-paper --peer`) invokes them at different phases.
 
@@ -171,11 +114,9 @@ The key insight: each enforces independence differently — role tension, depend
 
 ## v1.8.0 Cycle Lessons (2026-04-27)
 
-[LEARN:permissions] **Protected-path behavior is mode-dependent — re-verify, never assume** (re-verified 2026-08-22 vs the permission-modes doc: `bypassPermissions` disables prompts and safety checks INCLUDING protected paths — the earlier "`.claude/` always prompts" version of this entry was stale). Auto mode classifier-gates risky actions and since 2026-08-14 is the built-in starting mode on Pro/Max/Team. Forkers in default mode still see prompts on `.claude/` edits.
+[LEARN:permissions] **Protected-path behavior is mode-dependent — re-verify, never assume** (re-verified 2026-08-22 vs the permission-modes doc: `bypassPermissions` disables prompts and safety checks INCLUDING protected paths — the earlier "`.claude/` always prompts" version of this entry was stale). Auto mode classifier-gates risky actions and since 2026-08-14 is the built-in starting mode on Pro/Max/Team. Forkers in default mode still see prompts on `.claude/` edits. Batch 5+ edits to protected `.claude/` paths with one Bash `python3` heredoc (Edit fires the protected-paths gate; Bash does not). *[2026-09-26: not for settings/hooks — `root-of-trust-guard` blocks it.]*
 
 [LEARN:vscode] **`claudeCode.allowDangerouslySkipPermissions` is a typo trap** — the canonical key has NO `claudeCode.` prefix (unlike `claudeCode.initialPermissionMode`). The wrong key is silently ignored. Documented in `TROUBLESHOOTING.md`.
-
-[LEARN:edits] **Batch edits to protected `.claude/` paths: use Bash + `python3` heredoc.** Edit fires the protected-paths gate; Bash does not. For 5+ edits, one read→modify→write script via Bash avoids the prompt storm.
 
 [LEARN:audit] **Surface-sync checks counts and MARKED tables** (`<!-- surface-sync-table: ... -->`, since v2.0) — tables without the marker are invisible to it (the guide appendix shipped 58 of 60 rows in v2.5 until a semantic sweep caught it). New skill/agent: add the row AND confirm the table is marker-covered or hand-checked.
 
@@ -193,9 +134,9 @@ The key insight: each enforces independence differently — role tension, depend
 
 [LEARN:pattern] **Provenance as a YAML artifact, not a folder.** `templates/passport-template.yaml`: per-paper numeric claims with source line, output field, tolerance, status; `/audit-reproducibility` rewrites it in place. Queryable beats folder reports. (Scope-reduced from Imbad0202/ARS "Material Passport" to numeric claims only.)
 
-[LEARN:pattern] **Variance reporting > point estimate for peer review.** ~37% of verdicts vary purely from referee-disposition sampling (AgentReview, arXiv:2406.12708), so `--variance N` returns a verdict distribution + K-of-N concern table instead of one verdict. Bimodal spreads and tight majorities are both information. Referees route to Sonnet; hard cap N=5.
+[LEARN:pattern] **Variance reporting > point estimate for peer review.** ~37% of verdicts vary purely from referee-disposition sampling (AgentReview, arXiv:2406.12708), so `--variance N` returns a verdict distribution + K-of-N concern table instead of one verdict. Bimodal spreads and tight majorities are both information. Referees route to Sonnet; hard cap N=5. *[Fixed 2026-09-26: referees stay on Opus (do-not-demote).]*
 
-[LEARN:pattern] **HIGH-WARN must-fix for fabricated citations.** `/verify-claims` tiers: HIGH-WARN (fabricated reference / numerical or directional contradiction) is must-fix before commit; MED-WARN transient; LOW-WARN inaccessible source. Be conservative assigning HIGH-WARN — false positives erode the gate. The CoVe forked verifier (never sees the draft) is the architecture; the must-fix policy makes it consequential.
+[LEARN:pattern] **HIGH-WARN must-fix for fabricated citations.** `/verify-claims` tiers: HIGH-WARN (fabricated reference / numerical or directional contradiction) is must-fix before commit; MED-WARN transient; LOW-WARN inaccessible source. Be conservative assigning HIGH-WARN — false positives erode the gate. The CoVe forked verifier (never sees the draft) is the architecture; the must-fix policy makes it consequential. *[2026-09-26: no /commit gate reads it; verifier = fresh Agent call, not a fork.]*
 
 [LEARN:pattern] **70/20/10 model routing for cost discipline** (`model-routing.md`): Haiku tier mechanical, Sonnet tier review/critique, Opus tier high-judgment. 50–80% savings with no quality loss on the mechanical tier. Anti-pattern: down-tiering claim-verifier / methods-referee / editor — one false-positive PASS costs more than the routing saves. (Primary source: Anthropic "Decoupling brain from hands", Apr 2026.)
 
